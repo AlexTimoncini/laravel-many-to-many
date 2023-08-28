@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\Admin\HomeController;
 use  App\Http\Controllers\ProjectController;
 use  App\Http\Controllers\TypeController;
+use  App\Http\Controllers\TechnologyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('/types', TypeController::class);
+});
+
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::resource('/technologies', TechnologyController::class);
 });
