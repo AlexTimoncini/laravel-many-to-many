@@ -26,7 +26,14 @@
                             <option value="{{ $type->id }}" {{ $project->type->id == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
                         @endforeach
                     </select>
-                    <div class="col-12">
+                    <div class="col-12 rounded text-secondary bg-transparent mt-3 pl-2">
+                        <h3>Technology Used</h3>
+                        @foreach ($technologies as $technology)
+                            <input type="checkbox" value="{{ $technology->id }}" name="technology[]" id="{{ 'checkbox'.$technology->id }}" {{ in_Array($technology->id, $project->technologies->pluck('id')->toArray()) ? 'checked' : '' }}>
+                            <label for="{{ 'checkbox'.$technology->id }}" class="me-2">{{ $technology->name }}</label>
+                        @endforeach
+                    </div>
+                    <div class="col-12 my-3">
                         <input type="text" class="form-control" placeholder="Topic" name="topic" value="{{ old( 'topic', $project->topic) }}">
                     </div>
                     <div class="col-12 input-group mb-3">

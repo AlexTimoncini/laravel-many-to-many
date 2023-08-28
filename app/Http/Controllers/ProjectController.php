@@ -84,7 +84,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.edit', compact('project'), compact('types'));
+        $technologies = Technology::all();
+
+        return view('admin.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -93,9 +95,12 @@ class ProjectController extends Controller
     public function update(Request $request, String $id)
     {
         $project = Project::findOrFail($id);
+        $technologies = Technology::all();
+
         $data = $request->validate([
             'title'=> ['required',Rule::unique('projects')->ignore($project->id),'min:3','max:255'],
             'type'=> 'required|exists:types,id',
+            'technology'=> 'exists:technologies,id',
             'topic'=> ['required',Rule::unique('projects')->ignore($project->id),'min:3','max:255'],
             'gitHub'=> ['required',Rule::unique('projects')->ignore($project->id),'min:5','max:255'],
             'image' => ['image']
@@ -115,8 +120,9 @@ class ProjectController extends Controller
         $project->date = date('y-m-d');
         $project->gitHub = $data['gitHub'];
         $project->slug = Str::of("$project->id " . $data['title'])->slug('-');
-        $project->image = $data['image'];
         $project->save();
+
+        $project->technologies()->sync($data['technology']);
 
         return redirect()->route('projects.show', compact('project'));
     }
