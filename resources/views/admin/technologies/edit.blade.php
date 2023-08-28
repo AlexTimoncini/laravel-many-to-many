@@ -13,24 +13,18 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('admin.types.update', $type->id) }}" method="POST">
+            <form action="{{ route('admin.technologies.update', $technology->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row">
                     <div class="col-12">
-                        <input type="text" class="form-control" placeholder="Type Name" name="name" value="{{ old('name', $type->name) }}">
+                        <input type="text" class="form-control" placeholder="Type Name" name="name" value="{{ old('name', $technology->name) }}">
                     </div>
                     <div class="col-12 input-group mt-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">#</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Choose a color exadecimal ex: #ffffff" name="color" value="{{ old('color', $type->color) }}">
-                    </div>
-                    <div class="col-12 input-group my-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">https://documentation-link</span>
-                        </div>
-                        <input type="text" class="form-control" name="documentation" value="{{ old('documentation', $type->documentation) }}">
+                        <input type="text" class="form-control" placeholder="Choose a color exadecimal ex: #ffffff" name="border_color" value="{{ old('border_color', $technology->border_color) }}">
                     </div>
                     <div class="col-7 mx-auto">
                         <button type="submit" class="btn btn-primary d-block w-100 mt-2 mb-5">Save</button>

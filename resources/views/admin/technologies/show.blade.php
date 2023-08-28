@@ -25,7 +25,7 @@
     @else
     <div class="row align-items-center">
         <h1 class="col-6">There's nothing here!</h1>
-        <a href="{{ route('admin.technologies.create') }}" class="btn btn-success col-4 ms-auto">Create your first project with {{ $technology->name }}!</a>
+        <a href="{{ route('projects.create') }}" class="btn btn-success col-4 ms-auto">Create your first project with {{ $technology->name }}!</a>
     </div>
     @endif
     <a href="{{ route('admin.technologies.index') }}" class="btn btn-primary d-block mt-5">Back to list</a>

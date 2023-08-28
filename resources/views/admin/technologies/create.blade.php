@@ -13,23 +13,17 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('admin.types.store') }}" method="POST">
+            <form action="{{ route('admin.technologies.store') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-12">
-                        <input type="text" class="form-control" placeholder="New Type Name" name="name" value="{{ old('name', '') }}">
+                        <input type="text" class="form-control" placeholder="New Technology Name" name="name" value="{{ old('name', '') }}">
                     </div>
                     <div class="col-12 input-group mt-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">#</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Choose a color exadecimal ex: #ffffff" name="color" value="{{ old('color', '#') }}">
-                    </div>
-                    <div class="col-12 input-group my-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">https://documentation-link</span>
-                        </div>
-                        <input type="text" class="form-control" name="documentation" value="{{ old('documentation', '') }}">
+                        <input type="text" class="form-control" placeholder="Choose a color exadecimal ex: #ffffff" name="border_color" value="{{ old('border_color', '#') }}">
                     </div>
                     <div class="col-7 mx-auto">
                         <button type="submit" class="btn btn-primary d-block w-100 mt-2 mb-5">Save</button>
