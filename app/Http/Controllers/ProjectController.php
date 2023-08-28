@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.create', compact('types', 'technologies'));
     }
 
     /**
@@ -35,15 +37,16 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $types = Type::all();
+        $technologies = Technology::all();
         $request->validate([
             'title'=> 'required|unique:projects|min:3|max:255',
             'type'=> 'required|exists:types,id',
+            'technology'=> 'exists:technologies,id',
             'topic'=> 'required|unique:projects|min:3|max:255',
             'gitHub'=> 'required|unique:projects|min:5|max:255',
             'image' => 'required|image'
         ]);
         $data = $request->all();
-
         if ($request->hasFile('image')){
             $img_path = Storage::put('uploads/projects', $request['image']);
             $data['image'] = $img_path;
@@ -60,6 +63,8 @@ class ProjectController extends Controller
         $newProject->save();
         $newProject->slug = Str::of("$newProject->id " . $data['title'])->slug('-');
         $newProject->save();
+
+        $newProject->technologies()->attach($data['technology']);
 
         return redirect()->route('projects.show', $newProject);
     }

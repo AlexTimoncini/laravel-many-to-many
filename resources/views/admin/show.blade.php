@@ -5,10 +5,22 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card w-50 mx-auto">
+                @if (count($project->technologies) > 0)
+                <div class="card-header">
+                    @foreach ($project->technologies as $index=>$technology)
+                        @if($index == count($project->technologies) - 1)
+                        {{ $technology->name }}
+                        @else
+                        {{ $technology->name. ' -' }}
+                        @endif
+                    @endforeach
+                </div>
+                @endif
                 @if (str_starts_with($project->image, 'http'))
                 <img class="card-img-top" src="{{ $project->image }}" alt="{{ $project->title }}">
                 @else
                 <img class="card-img-top" src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}">
+
                 @endif
                 <div class="card-body">
                     <h5 class="card-title">{{ $project->title }}</h5>
