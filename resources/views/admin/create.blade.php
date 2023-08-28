@@ -28,7 +28,7 @@
                     <div class="col-12 rounded text-secondary bg-transparent mt-3 pl-2">
                         <h3>Technology Used</h3>
                         @foreach ($technologies as $technology)
-                            <input type="checkbox" value="{{ $technology->id }}" name="technology[]" id="{{ 'checkbox'.$technology->id }}">
+                            <input type="checkbox" value="{{ $technology->id }}" name="technology[]" id="{{ 'checkbox'.$technology->id }}" {{  in_array($technology->id, old('technology', [])) ? 'checked' : '' }}>
                             <label for="{{ 'checkbox'.$technology->id }}" class="me-2">{{ $technology->name }}</label>
                         @endforeach
                     </div>
