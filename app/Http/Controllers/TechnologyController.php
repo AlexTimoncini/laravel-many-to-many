@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Technology;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class TechnologyController extends Controller
@@ -37,7 +38,8 @@ class TechnologyController extends Controller
      */
     public function show(Technology $technology)
     {
-        //
+        $projects = $technology->projects()->paginate(15);
+        return view('admin.technologies.show', compact('projects', 'technology'));
     }
 
     /**
